@@ -59,5 +59,12 @@ namespace TestLabb2
         {
             Application.Exit();
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            textNamn.Clear();
+            textLösenord.Clear();
+            textNamn.Focus();
+        }
     }
 }

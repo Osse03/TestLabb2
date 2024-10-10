@@ -43,6 +43,7 @@ namespace TestLabb2
             label3 = new Label();
             textNamn = new TextBox();
             textLösenord = new TextBox();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -110,7 +111,7 @@ namespace TestLabb2
             button1.BackColor = Color.SeaGreen;
             button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(123, 342);
+            button1.Location = new Point(123, 339);
             button1.Name = "button1";
             button1.Size = new Size(129, 45);
             button1.TabIndex = 8;
@@ -124,7 +125,7 @@ namespace TestLabb2
             label2.BackColor = Color.White;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Green;
-            label2.Location = new Point(140, 390);
+            label2.Location = new Point(140, 387);
             label2.Name = "label2";
             label2.Size = new Size(97, 21);
             label2.TabIndex = 9;
@@ -164,11 +165,25 @@ namespace TestLabb2
             textLösenord.Size = new Size(188, 25);
             textLösenord.TabIndex = 12;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.White;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.Green;
+            label4.Location = new Point(149, 423);
+            label4.Name = "label4";
+            label4.Size = new Size(75, 20);
+            label4.TabIndex = 13;
+            label4.Text = "Rensa Fält";
+            label4.Click += label4_Click;
+            // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
             ClientSize = new Size(382, 504);
+            Controls.Add(label4);
             Controls.Add(textLösenord);
             Controls.Add(textNamn);
             Controls.Add(label3);
@@ -202,5 +217,6 @@ namespace TestLabb2
         private Label label3;
         private TextBox textNamn;
         private TextBox textLösenord;
+        private Label label4;
     }
 }
