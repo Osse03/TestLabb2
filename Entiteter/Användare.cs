@@ -6,13 +6,23 @@ using System.Threading.Tasks;
 
 namespace Entiteter
 {
-    public class Användare
+    public class Användare : Person
     {
-
         public string AnvändareID { get; set; }
-        public string FörNamn { get; set; }
-        public string EfterNamn { get; set; }
         public  string BetalningsMetod { get; set; }
         public List<Hyra> HyresHistorik { get; set; }
+
+
+        //public Användare(string användareID,string fullNamn, string lösenOrd, string ePost, string betalningsmetod, List<Hyra> hyresHistorik)
+        //{
+        //    this.AnvändareID = användareID;
+        //    this.FullNamn = fullNamn;
+        //    this.Lösenord = lösenOrd;
+        //    this.Epost = ePost;
+        //    this.BetalningsMetod = betalningsmetod;
+        //    this.HyresHistorik = hyresHistorik;
+            
+            
+        //}
     }
 }

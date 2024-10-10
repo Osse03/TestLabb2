@@ -7,4 +7,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Entiteter\Entiteter.csproj" />
+    <ProjectReference Include="..\InMemoryDatabase\InMemoryDatabase.csproj" />
+  </ItemGroup>
+
 </Project>
