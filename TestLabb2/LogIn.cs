@@ -2,12 +2,13 @@ using InMemoryDatabase;
 
 namespace TestLabb2
 {
-    public partial class Form1 : Form
+    public partial class LogIn : Form
     {
-        private Database Database = new Database();
-        public Form1()
+        private Database database;
+        public LogIn(Database db)
         {
             InitializeComponent();
+            database = db;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -27,15 +28,14 @@ namespace TestLabb2
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var användareLista = Database.HämtaAnvändare();
+            var användareLista = database.HämtaAnvändare();
 
             var användare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text);
+            var användareLösen = användareLista.FirstOrDefault(a => a.Lösenord == textLösenord.Text);
 
-
-            if (användare != null)
+            if (användare != null && användareLösen != null)
             {
-
-                new Form2().Show();
+                new Form3().Show();
                 this.Hide();
 
             }
@@ -52,7 +52,7 @@ namespace TestLabb2
 
         private void label2_Click(object sender, EventArgs e)
         {
-
+            new SkapaKonto(database).Show();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -65,6 +65,28 @@ namespace TestLabb2
             textNamn.Clear();
             textLösenord.Clear();
             textNamn.Focus();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VissaNyLösenord_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VisaLösenord_CheckedChanged(object sender, EventArgs e)
+        {
+            if (textVisaLösenord.Checked)
+            {
+                textLösenord.PasswordChar = '\0';
+            }
+            else
+            {
+                textLösenord.PasswordChar = '*';            
+            }
         }
     }
 }

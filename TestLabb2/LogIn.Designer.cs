@@ -3,7 +3,7 @@ using Entiteter;
 
 namespace TestLabb2
 {
-    partial class Form1
+    partial class LogIn
     {
        
         /// <summary>
@@ -38,12 +38,15 @@ namespace TestLabb2
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            button1 = new Button();
+            EfterLogIN = new Button();
             label2 = new Label();
             label3 = new Label();
             textNamn = new TextBox();
             textLösenord = new TextBox();
             label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            textVisaLösenord = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -106,18 +109,18 @@ namespace TestLabb2
             panel2.Size = new Size(222, 1);
             panel2.TabIndex = 7;
             // 
-            // button1
+            // EfterLogIN
             // 
-            button1.BackColor = Color.SeaGreen;
-            button1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(123, 339);
-            button1.Name = "button1";
-            button1.Size = new Size(129, 45);
-            button1.TabIndex = 8;
-            button1.Text = "LOG IN";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click_1;
+            EfterLogIN.BackColor = Color.SeaGreen;
+            EfterLogIN.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            EfterLogIN.ForeColor = Color.White;
+            EfterLogIN.Location = new Point(123, 339);
+            EfterLogIN.Name = "EfterLogIN";
+            EfterLogIN.Size = new Size(129, 45);
+            EfterLogIN.TabIndex = 8;
+            EfterLogIN.Text = "LOG IN";
+            EfterLogIN.UseVisualStyleBackColor = false;
+            EfterLogIN.Click += button1_Click_1;
             // 
             // label2
             // 
@@ -145,6 +148,7 @@ namespace TestLabb2
             // 
             // textNamn
             // 
+            textNamn.BackColor = Color.FromArgb(230, 231, 233);
             textNamn.BorderStyle = BorderStyle.None;
             textNamn.Font = new Font("Sylfaen", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textNamn.ForeColor = SystemColors.WindowText;
@@ -156,12 +160,14 @@ namespace TestLabb2
             // 
             // textLösenord
             // 
+            textLösenord.BackColor = Color.FromArgb(230, 231, 233);
             textLösenord.BorderStyle = BorderStyle.None;
             textLösenord.Font = new Font("Sylfaen", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textLösenord.ForeColor = SystemColors.WindowText;
             textLösenord.Location = new Point(105, 292);
             textLösenord.Multiline = true;
             textLösenord.Name = "textLösenord";
+            textLösenord.PasswordChar = '*';
             textLösenord.Size = new Size(188, 25);
             textLösenord.TabIndex = 12;
             // 
@@ -178,25 +184,68 @@ namespace TestLabb2
             label4.Text = "Rensa Fält";
             label4.Click += label4_Click;
             // 
-            // Form1
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.White;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Green;
+            label5.Location = new Point(74, 210);
+            label5.Name = "label5";
+            label5.Size = new Size(39, 15);
+            label5.TabIndex = 14;
+            label5.Text = "Name";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.White;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.Green;
+            label6.Location = new Point(74, 274);
+            label6.Name = "label6";
+            label6.Size = new Size(57, 15);
+            label6.TabIndex = 15;
+            label6.Text = "Password";
+            // 
+            // textVisaLösenord
+            // 
+            textVisaLösenord.AutoSize = true;
+            textVisaLösenord.Cursor = Cursors.Hand;
+            textVisaLösenord.FlatStyle = FlatStyle.Flat;
+            textVisaLösenord.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textVisaLösenord.Location = new Point(258, 323);
+            textVisaLösenord.Name = "textVisaLösenord";
+            textVisaLösenord.Size = new Size(104, 19);
+            textVisaLösenord.TabIndex = 16;
+            textVisaLösenord.Text = "Vissa Lösenord";
+            textVisaLösenord.UseVisualStyleBackColor = true;
+            textVisaLösenord.CheckedChanged += VisaLösenord_CheckedChanged;
+            // 
+            // LogIn
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.White;
             ClientSize = new Size(382, 504);
+            Controls.Add(textVisaLösenord);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(textLösenord);
             Controls.Add(textNamn);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(button1);
+            Controls.Add(EfterLogIN);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox2);
+            ForeColor = Color.FromArgb(164, 165, 169);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "Form1";
+            Name = "LogIn";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -212,11 +261,14 @@ namespace TestLabb2
         private Label label1;
         private Panel panel1;
         private Panel panel2;
-        private Button button1;
+        private Button EfterLogIN;
         private Label label2;
         private Label label3;
         private TextBox textNamn;
         private TextBox textLösenord;
         private Label label4;
+        private Label label5;
+        private Label label6;
+        private CheckBox textVisaLösenord;
     }
 }
