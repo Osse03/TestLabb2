@@ -17,9 +17,12 @@ namespace TestLabb2
 
             // Skapa en instans av Database
             Database db = new Database();
+            // Anropar befintliga användare
+            db.InitieraAnvändare();
 
             // Passera denna instans till LogIn-konstruktorn
             Application.Run(new LogIn(db));
+
         }
     }
 }

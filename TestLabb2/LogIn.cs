@@ -28,12 +28,11 @@ namespace TestLabb2
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var användareLista = database.HämtaAnvändare();
+            var NyAnvändareLista = database.HämtaAnvändare();
+            var Nyanvändare = NyAnvändareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text);
+            var NyanvändareLösen = NyAnvändareLista.FirstOrDefault(a => a.Lösenord == textLösenord.Text);
 
-            var användare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text);
-            var användareLösen = användareLista.FirstOrDefault(a => a.Lösenord == textLösenord.Text);
-
-            if (användare != null && användareLösen != null)
+            if (Nyanvändare != null && NyanvändareLösen != null)
             {
                 new Form3().Show();
                 this.Hide();

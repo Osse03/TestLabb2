@@ -22,7 +22,7 @@ namespace InMemoryDatabase
             Användares.Add(användare);
         } 
 
-        public void InitieraAnvändare()
+        public void  InitieraAnvändare()
         {
             if (Användares.Count == 0)
             {
@@ -44,6 +44,8 @@ namespace InMemoryDatabase
                     BetalningsMetod = "MasterCard"
                 });
             }
+
+    
         }
 
         public List<Fordon> HämtaFordon()
