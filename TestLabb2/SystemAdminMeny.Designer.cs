@@ -106,6 +106,7 @@
             label3.Size = new Size(33, 20);
             label3.TabIndex = 12;
             label3.Text = "Exit";
+            label3.Click += label3_Click;
             // 
             // label1
             // 

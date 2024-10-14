@@ -39,6 +39,8 @@ namespace TestLabb2
 
             if (Nyanvändare != null)
             {
+                MessageBox.Show($"Du är inloggad");
+                this.Hide();
                 //new ().Show();
                 //this.Hide();
 

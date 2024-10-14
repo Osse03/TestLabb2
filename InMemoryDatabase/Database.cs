@@ -133,7 +133,7 @@ namespace InMemoryDatabase
 
                 },
 
-                  new Fordon
+                 new Fordon
                 {
                     FordonID = "ES2",
                     Typ ="El Scoter",

@@ -65,7 +65,7 @@ namespace TestLabb2
             textNewUserName.Clear();
             textEpost.Clear();
             textBetalningsMetod.Clear();
-            textBetalningsMetod.Clear();
+            textAnvändareID.Clear();
             textNyttLösenord.Clear();
             textRättLösenord.Clear();
             textNewUserName.Focus();
