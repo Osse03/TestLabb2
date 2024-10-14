@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TestLabb2
 {
-    public partial class Form3 : Form
+    public partial class LäggTillFordon : Form
     {
-        public Form3()
+        public LäggTillFordon()
         {
             InitializeComponent();
         }

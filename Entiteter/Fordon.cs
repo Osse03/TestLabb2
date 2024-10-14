@@ -10,7 +10,7 @@ namespace Entiteter
     {
         public string FordonID { get; set; }
         public string Typ { get; set; }
-        public int BattariNivå { get; set; }
+        public int BatteriNivå { get; set; }
         public string Status { get; set; }
 
         public Hyra Hyra { get; set; }

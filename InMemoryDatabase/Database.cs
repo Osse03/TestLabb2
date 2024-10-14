@@ -28,30 +28,120 @@ namespace InMemoryDatabase
             {
                 Användares.Add(new Användare
                 {
-                    AnvändareID = "0123",
-                    FullNamn = "Osama Alhussain",
+                    AnvändareID = "A123",
+                    FullNamn = "Ali Chorba",
                     Lösenord = "12345",
-                    Epost = "osamaalhussain@icloud.com",
-                    BetalningsMetod = "Klarna"
+                    Epost = "AliChorba@icloud.com",
+                    BetalningsMetod = "Klarna",
+                    HyresHistorik = new List<Hyra>
+                    {
+                         new Hyra
+                         {
+                             HyraID = "H000",
+                             Kostnad = 55.95,
+                              StartTid = DateTime.Now.AddMonths(-1),
+                              SlutTid = DateTime.Now
+                    }
+                          }
+
                 });
 
                 Användares.Add(new Användare
                 {
-                    AnvändareID = "V123",
-                    FullNamn = "Varto Kaka",
+                    AnvändareID = "D123",
+                    FullNamn = "Alex Nilsson",
                     Lösenord = "123456",
-                    Epost = "vartokaka@icloud.com",
-                    BetalningsMetod = "MasterCard"
+                    Epost = "AlexNilsson@icloud.com",
+                    BetalningsMetod = "MasterCard",
+                    HyresHistorik = new List<Hyra>
+                    {
+                         new Hyra
+                         {
+                               HyraID = "H001",
+                               Kostnad = 75.00,
+                              StartTid = DateTime.Now.AddMonths(-2),
+                                 SlutTid = DateTime.Now.AddMonths(-1)
+                         }
+                    }
                 });
             }
 
     
         }
 
+        public List<SystemAdmin> InitieraSystemAdmin()
+        {
+
+            List<SystemAdmin> systemAdmins = new List<SystemAdmin>()
+            {
+
+                new SystemAdmin
+                {
+                    SystemAdminID = "O123",
+                    FullNamn = "Osama Alhussain",
+                    Lösenord = "1234567",
+                    Epost = "osamaalhussain@icloud.com",
+
+                },
+
+                new SystemAdmin
+                {
+                    SystemAdminID = "V123",
+                    FullNamn = "Varto Kaka",
+                    Lösenord = "123456",
+                    Epost = "vartokaka@icloud.com",
+                }
+
+
+
+            };
+            
+            return systemAdmins;
+
+        }
+
+
+
         public List<Fordon> HämtaFordon()
         {
             List<Fordon> fordon = new List<Fordon>()
             {
+                new Fordon
+                {
+                    FordonID = "ES1",
+                    Typ ="El Scoter",
+                    BatteriNivå = 80,
+                    Status = "Tillgänglig"
+                   
+                },
+
+                new Fordon
+                {
+                    FordonID = "EC1",
+                    Typ ="El Cykel",
+                    BatteriNivå = 95,
+                    Status = "Tillgänglig"
+
+                },
+
+                 new Fordon
+                {
+                    FordonID = "EC2",
+                    Typ ="El Cykel",
+                    BatteriNivå = 20,
+                    Status = "Laddar"
+
+                },
+
+                  new Fordon
+                {
+                    FordonID = "ES2",
+                    Typ ="El Scoter",
+                    BatteriNivå = 100,
+                    Status = "Tillgänglig"
+
+                },
+
 
             };
 

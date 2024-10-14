@@ -4,11 +4,12 @@ namespace TestLabb2
 {
     public partial class LogIn : Form
     {
-        private Database database;
+       
+        private Database database = new Database();
         public LogIn(Database db)
         {
             InitializeComponent();
-            database = db;
+           this.database = db;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,14 +30,24 @@ namespace TestLabb2
         private void button1_Click_1(object sender, EventArgs e)
         {
             var NyAnvändareLista = database.HämtaAnvändare();
-            var Nyanvändare = NyAnvändareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text);
-            var NyanvändareLösen = NyAnvändareLista.FirstOrDefault(a => a.Lösenord == textLösenord.Text);
+            var SystemAdminLista = database.InitieraSystemAdmin();
+          
 
-            if (Nyanvändare != null && NyanvändareLösen != null)
+            var Nyanvändare = NyAnvändareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
+            var systemAdmin = SystemAdminLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
+
+
+            if (Nyanvändare != null)
             {
-                new Form3().Show();
-                this.Hide();
+                //new ().Show();
+                //this.Hide();
 
+            }
+            else if (systemAdmin != null)
+            {
+
+                new SystemAdminMeny().Show();
+                this.Hide();
             }
             else
             {
@@ -48,7 +59,7 @@ namespace TestLabb2
 
 
         }
-
+        
         private void label2_Click(object sender, EventArgs e)
         {
             new SkapaKonto(database).Show();
