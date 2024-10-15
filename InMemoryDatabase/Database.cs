@@ -60,7 +60,7 @@ namespace InMemoryDatabase
                                HyraID = "H001",
                                Kostnad = 75.00,
                               StartTid = DateTime.Now.AddMonths(-2),
-                                 SlutTid = DateTime.Now.AddMonths(-1)
+                                 SlutTid = DateTime.Now
                          }
                     }
                 });
@@ -104,50 +104,157 @@ namespace InMemoryDatabase
 
         public List<Fordon> HämtaFordon()
         {
-            List<Fordon> fordon = new List<Fordon>()
+            return HämtaStation().SelectMany(station => station.BefintligaFordon).ToList();
+
+        }
+        public List<Station> HämtaStation()
+        {
+            List<Station> stations = new List<Station>()
             {
-                new Fordon
+                new Station
                 {
-                    FordonID = "ES1",
-                    Typ ="El Scoter",
-                    BatteriNivå = 80,
-                    Status = "Tillgänglig"
-                   
+                    StationID = 1,
+                    Adress = "Göteborg",
+                    AnatalFodon = 3,
+                    BefintligaFordon = new List<Fordon>
+                    {
+                       new Fordon
+                       {
+                           FordonID = 1,
+                          Typ ="El Scoter",
+                           BatteriNivå = 80,
+                            Status = "Tillgänglig"
+
+                       },
+
+                      new Fordon
+                      {
+                         FordonID = 2,
+                         Typ ="El Scoter",
+                         BatteriNivå = 100,
+                         Status = "Tillgänglig"
+
+                      },
+
+
+
+                        new Fordon
+                         {
+                           FordonID = 3,
+                           Typ ="El Cykel",
+                           BatteriNivå = 20,
+                           Status = "Laddar"
+
+
+                        },
+                    }
                 },
 
-                new Fordon
+                new Station
                 {
-                    FordonID = "EC1",
-                    Typ ="El Cykel",
-                    BatteriNivå = 95,
-                    Status = "Tillgänglig"
+                    StationID = 2,
+                    Adress = "Borås",
+                    AnatalFodon = 3,
+                    BefintligaFordon = new List<Fordon>
+                    {
+                         new Fordon
+                         {
+                            FordonID = 1,
+                            Typ ="El Scoter",
+                            BatteriNivå = 80,
+                            Status = "Tillgänglig"
+
+                         },
+
+                         new Fordon
+                         {
+                           FordonID = 2,
+                           Typ ="El Cykel",
+                           BatteriNivå = 20,
+                           Status = "Laddar"
+
+
+                         },
+                    }
 
                 },
 
-                 new Fordon
+                 new Station
                 {
-                    FordonID = "EC2",
-                    Typ ="El Cykel",
-                    BatteriNivå = 20,
-                    Status = "Laddar"
+                    StationID = 3,
+                    Adress = "Uppsala",
+                    AnatalFodon = 3,
+                    BefintligaFordon = new List<Fordon>
+                    {
+                       new Fordon
+                       {
+                           FordonID = 1,
+                          Typ ="El Scoter",
+                           BatteriNivå = 80,
+                            Status = "Tillgänglig"
 
+                       },
+
+                      new Fordon
+                      {
+                         FordonID = 2,
+                          Typ ="El Cykel",
+                          BatteriNivå = 95,
+                         Status = "Tillgänglig"
+
+                      },
+                    }
                 },
 
-                 new Fordon
+                 new Station
                 {
-                    FordonID = "ES2",
-                    Typ ="El Scoter",
-                    BatteriNivå = 100,
-                    Status = "Tillgänglig"
+                    StationID = 4,
+                    Adress = "Jokkmokk",
+                    AnatalFodon = 3,
+                    BefintligaFordon = new List<Fordon>
+                    {
+                         new Fordon
+                         {
+                            FordonID = 1,
+                            Typ ="El Scoter",
+                            BatteriNivå = 80,
+                            Status = "Tillgänglig"
+
+                         },
+
+                         new Fordon
+                         {
+                            FordonID = 2,
+                            Typ ="El Cykel",
+                            BatteriNivå = 95,
+                            Status = "Tillgänglig"
+
+                         },
+                         new Fordon
+                         {
+                            FordonID = 3,
+                            Typ ="El Scoter",
+                            BatteriNivå = 80,
+                            Status = "Tillgänglig"
+
+                         },
+                         new Fordon
+                         {
+                          FordonID = 4,
+                          Typ ="El Cykel",
+                          BatteriNivå = 95,
+                          Status = "Tillgänglig"
+
+                         },
+                    }
 
                 },
 
 
             };
 
-            return fordon;
+            return stations;
         }
-
 
 
 

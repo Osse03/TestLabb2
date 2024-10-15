@@ -19,7 +19,8 @@ namespace TestLabb2
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            new Upddatera().Show();
+            this.Hide();
         }
 
         private void label1_Click(object sender, EventArgs e)

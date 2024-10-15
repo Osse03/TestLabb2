@@ -8,7 +8,7 @@ namespace Entiteter
 {
     public class Fordon
     {
-        public string FordonID { get; set; }
+        public int FordonID { get; set; }
         public string Typ { get; set; }
         public int BatteriNivå { get; set; }
         public string Status { get; set; }
