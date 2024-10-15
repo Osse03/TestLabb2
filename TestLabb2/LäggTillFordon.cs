@@ -173,11 +173,6 @@ namespace TestLabb2
             txtFordonID.Focus();
         }
 
-        private void textEpost_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TabortFordon_Click(object sender, EventArgs e)
         {
             //Kontrollera att en station och ett fordon är valt
