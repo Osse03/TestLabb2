@@ -180,7 +180,7 @@ namespace TestLabb2
 
         private void TabortFordon_Click(object sender, EventArgs e)
         {
-            Kontrollera att en station och ett fordon är valt
+            //Kontrollera att en station och ett fordon är valt
             if (listFordon.SelectedItems.Count > 0 && listStationer.SelectedItems.Count > 0)
             {
                 // Hämta den valda stationens ID
