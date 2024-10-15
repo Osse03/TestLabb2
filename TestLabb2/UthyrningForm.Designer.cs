@@ -31,6 +31,8 @@
             txtAnvändarnamn = new TextBox();
             txtFordonID = new TextBox();
             btnHyra = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtAnvändarnamn
@@ -57,16 +59,28 @@
             btnHyra.Text = "Hyra Fordon";
             btnHyra.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Screenshot_2024_10_11_000153;
+            pictureBox1.Location = new Point(559, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(254, 199);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            // 
             // UthyrningForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(806, 460);
+            Controls.Add(pictureBox1);
             Controls.Add(btnHyra);
             Controls.Add(txtFordonID);
             Controls.Add(txtAnvändarnamn);
             Name = "UthyrningForm";
             Text = "UthyrningForm";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -76,5 +90,6 @@
         private TextBox txtAnvändarnamn;
         private TextBox txtFordonID;
         private Button btnHyra;
+        private PictureBox pictureBox1;
     }
 }
