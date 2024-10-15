@@ -1,6 +1,6 @@
 ﻿namespace TestLabb2
 {
-    partial class LäggTillFordon
+    partial class FordonHantering
     {
         /// <summary>
         /// Required designer variable.
@@ -58,7 +58,6 @@
             listFordon.TabIndex = 0;
             listFordon.UseCompatibleStateImageBehavior = false;
             listFordon.View = View.Details;
-            //listFordon.SelectedIndexChanged += listFordon_SelectedIndexChanged_1;
             // 
             // listStationer
             // 
@@ -83,7 +82,6 @@
             label2.Size = new Size(52, 14);
             label2.TabIndex = 3;
             label2.Text = "Fordon";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -116,7 +114,6 @@
             txtFordonID.Name = "txtFordonID";
             txtFordonID.Size = new Size(229, 23);
             txtFordonID.TabIndex = 13;
-            //txtFordonID.TextChanged += textEpost_TextChanged;
             // 
             // label4
             // 
@@ -230,7 +227,7 @@
             pictureBox1.TabIndex = 28;
             pictureBox1.TabStop = false;
             // 
-            // LäggTillFordon
+            // FordonHantering
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -253,7 +250,7 @@
             Controls.Add(listStationer);
             Controls.Add(listFordon);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "LäggTillFordon";
+            Name = "FordonHantering";
             Text = "Form3";
             Load += LäggTillFordon_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

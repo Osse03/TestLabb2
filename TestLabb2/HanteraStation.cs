@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TestLabb2
 {
-    public partial class Upddatera: Form
+    public partial class HanteraStation: Form
     {
-        public Upddatera()
+        public HanteraStation()
         {
             InitializeComponent();
         }

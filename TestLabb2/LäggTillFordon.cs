@@ -13,11 +13,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TestLabb2
 {
-    public partial class LäggTillFordon : Form
+    public partial class FordonHantering : Form
     {
 
         private Database database = new Database();
-        public LäggTillFordon()
+        public FordonHantering()
         {
             InitializeComponent();
             listStationer.SelectedIndexChanged += new EventHandler(listStationer_SelectedIndexChanged);
@@ -52,22 +52,35 @@ namespace TestLabb2
             }
 
         }
-
-        private void listFordon_SelectedIndexChanged(object sender, EventArgs e)
+        private void listFordon_SelectedIndexChanged_1(object sender, EventArgs e)
         {
+            if (listFordon.SelectedItems.Count > 0)
+            {
+                // Hämta det valda fordonet från ListView
+                int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
 
+                // Hämta vald station
+                int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
+                var stationer = database.HämtaStation();
+                var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
 
+                if (valdStation != null)
+                {
+                    // Hitta det valda fordonet baserat på ID
+                    var valtFordon = valdStation.BefintligaFordon.FirstOrDefault(fordon => fordon.FordonID == selectedFordonID);
+
+                    if (valtFordon != null)
+                    {
+                        // Fyll i textfälten med fordonets data
+                        txtFordonID.Text = valtFordon.FordonID.ToString();
+                        txtTyp.Text = valtFordon.Typ;
+                        txtBatteriNivå.Text = valtFordon.BatteriNivå.ToString();
+                        txtStatus.Text = valtFordon.Status;
+                    }
+                }
+            }
 
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void listStationer_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Kontrollera att en station har valts
@@ -103,106 +116,77 @@ namespace TestLabb2
                 }
             }
 
-        }
 
+        }
         private void Uppdatera_Click(object sender, EventArgs e)
         {
-            // Kontrollera att ett fordon är valt
             if (listFordon.SelectedItems.Count > 0 && listStationer.SelectedItems.Count > 0)
             {
-                // Hämta den valda stationens ID
+                // Hämta valt station och fordonsID
                 int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
+                int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
+
+                // Hämta stationerna från databasen
                 var stationer = database.HämtaStation();
                 var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
 
-                // Hämta det valda fordonets ID från listFordon
-                int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
-                var valtFordon = valdStation.BefintligaFordon.FirstOrDefault(fordon => fordon.FordonID == selectedFordonID);
-
-                if (valtFordon != null)
+                if (valdStation != null)
                 {
-                    // Uppdatera fordonets information baserat på användarens inmatning från textfälten
-                    valtFordon.Typ = txtTyp.Text;
-                    valtFordon.BatteriNivå = int.Parse(txtBatteriNivå.Text);
-                    valtFordon.Status = txtStatus.Text;
+                    // Hitta fordonet med rätt ID
+                    var valtFordon = valdStation.BefintligaFordon.FirstOrDefault(fordon => fordon.FordonID == selectedFordonID);
+                    if (valtFordon != null)
+                    {
+                        // Uppdatera fordonets egenskaper baserat på användarens inmatning
+                        valtFordon.Typ = txtTyp.Text;  // Ny typ som användaren har matat in
+                        valtFordon.BatteriNivå = int.Parse(txtBatteriNivå.Text);  // Ny batterinivå som användaren har matat in
+                        valtFordon.Status = txtStatus.Text;  // Ny status som användaren har matat in
 
-                    // Uppdatera listan över fordon för att visa de uppdaterade värdena
-                    UppdateraFordonLista(valdStation);
+                        // Uppdatera listan med fordon
+                        UppdateraFordonLista(valdStation);
+
+                        // Spara ändringar under körning
+                        SparaÄndringar(valdStation);
+
+
+                        txtFordonID.Clear();
+                        txtTyp.Clear();
+                        txtBatteriNivå.Clear();
+                        txtStatus.Clear();
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Välj ett fordon att uppdatera.");
             }
 
         }
 
         private void LäggTillFordn_Click(object sender, EventArgs e)
         {
-            // Kontrollera att en station är vald
             if (listStationer.SelectedItems.Count > 0)
             {
-                // Hämta den valda stationens ID
                 int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
-
-                // Hämta alla stationer och hitta den valda stationen
-                var stationer = database.HämtaStation();
-                var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
-
-                // Skapa ett nytt fordon baserat på användarens inmatning
-                var nyttFordon = new Fordon
-                {
-                    FordonID = int.Parse(txtFordonID.Text),
-                    Typ = txtTyp.Text,
-                    BatteriNivå = int.Parse(txtBatteriNivå.Text),
-                    Status = txtStatus.Text
-                };
-
-                // Lägg till det nya fordonet i den valda stationens fordon-lista
-                valdStation.BefintligaFordon.Add(nyttFordon);
-
-                // Uppdatera listan över fordon och stationens fordonräknare
-                UppdateraFordonLista(valdStation);
-                listStationer.SelectedItems[0].SubItems[2].Text = valdStation.BefintligaFordon.Count.ToString(); // Uppdatera antal fordon
-            }
-            else
-            {
-                MessageBox.Show("Välj en station innan du lägger till ett fordon.");
-            }
-
-            txtFordonID.Clear();
-            txtBatteriNivå.Clear();
-            txtStatus.Clear();
-            txtTyp.Clear();
-            txtFordonID.Focus();
-        }
-
-        private void TabortFordon_Click(object sender, EventArgs e)
-        {
-            //Kontrollera att en station och ett fordon är valt
-            if (listFordon.SelectedItems.Count > 0 && listStationer.SelectedItems.Count > 0)
-            {
-                // Hämta den valda stationens ID
-                int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
-
-                // Hämta alla stationer och hitta den valda stationen
                 var stationer = database.HämtaStation();
                 var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
 
                 if (valdStation != null)
                 {
-                    // Hämta det valda fordonets ID från textrutan
-                    int selectedFordonID = int.Parse(txtFordonID.Text);
-
-                    // Hitta det valda fordonet i den valda stationens fordon-lista
-                    var valtFordon = valdStation.BefintligaFordon.FirstOrDefault(fordon => fordon.FordonID == selectedFordonID);
-
-                    // Om fordonet hittas, ta bort det från listan
-                    if (valtFordon != null)
+                    if (int.TryParse(txtFordonID.Text, out int fordonsID) && !string.IsNullOrWhiteSpace(txtTyp.Text) && int.TryParse(txtBatteriNivå.Text, out int batteriNivå))
                     {
-                        valdStation.BefintligaFordon.Remove(valtFordon);
+                        var nyttFordon = new Fordon
+                        {
+                            FordonID = fordonsID,
+                            Typ = txtTyp.Text,
+                            BatteriNivå = batteriNivå,
+                            Status = txtStatus.Text
+                        };
 
-                        // Uppdatera listan över fordon och stationens fordonräknare
+                        valdStation.BefintligaFordon.Add(nyttFordon);
                         UppdateraFordonLista(valdStation);
-                        listStationer.SelectedItems[0].SubItems[2].Text = valdStation.BefintligaFordon.Count.ToString(); // Uppdatera antal fordon
-
-                        // Rensa FordonID-fältet
+                        SparaÄndringar(valdStation);
+                       
+                        // Rensa textfälten
                         txtFordonID.Clear();
                         txtTyp.Clear();
                         txtBatteriNivå.Clear();
@@ -210,21 +194,51 @@ namespace TestLabb2
                     }
                     else
                     {
-                        MessageBox.Show("Fordonet hittades inte.");
+                        MessageBox.Show("Fyll i alla fält korrekt.");
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Välj både en station och ett fordon innan du tar bort.");
+                MessageBox.Show("Välj en station innan du lägger till ett fordon.");
             }
         }
+
+        private void TabortFordon_Click(object sender, EventArgs e)
+        {
+            if (listFordon.SelectedItems.Count > 0 && listStationer.SelectedItems.Count > 0)
+            {
+                // Hämta valt station och fordons-ID
+                int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
+                int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
+
+
+                var stationer = database.HämtaStation();
+                var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
+
+                if (valdStation != null)
+                {
+                    // Hitta fordonet och ta bort det från stationens lista
+                    var valtFordon = valdStation.BefintligaFordon.FirstOrDefault(fordon => fordon.FordonID == selectedFordonID);
+                    if (valtFordon != null)
+                    {
+                        valdStation.BefintligaFordon.Remove(valtFordon);  // Ta bort fordonet
+                        UppdateraFordonLista(valdStation);  // Uppdatera ListView
+                        SparaÄndringar(valdStation);  // Spara ändringar
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Välj ett fordon att ta bort.");
+            }
+
+        }
+
         private void UppdateraFordonLista(Station valdStation)
         {
-            // Rensa listan för fordon
             listFordon.Items.Clear();
 
-            // Lägg till varje fordon från den valda stationen till listan
             foreach (var fordon in valdStation.BefintligaFordon)
             {
                 ListViewItem item = new ListViewItem(fordon.FordonID.ToString());
@@ -233,32 +247,29 @@ namespace TestLabb2
                 item.SubItems.Add(fordon.Status);
                 listFordon.Items.Add(item);
             }
+
+            // Uppdatera stationens fordonräkning
+            listStationer.SelectedItems[0].SubItems[2].Text = valdStation.BefintligaFordon.Count.ToString();
         }
 
-        private void listFordon_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void SparaÄndringar(Station valdStation)
         {
-            if (listFordon.SelectedItems.Count > 0)
-            {
-                // Hämta valt fordon
-                int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
+            // Uppdatera antal fordon i den valda stationen
+            valdStation.AntalFodon = valdStation.BefintligaFordon.Count;
 
-                // Hämta den valda stationens ID
-                int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
-                var stationer = database.HämtaStation();
-                var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
+            // Logga en sparningsoperation (kan ersättas med riktig sparlogik)
+            Console.WriteLine($"Sparade ändringar för station: {valdStation.Adress}, Antal fordon: {valdStation.AntalFodon}");
 
-                // Hämta det valda fordonet
-                var valtFordon = valdStation.BefintligaFordon.FirstOrDefault(fordon => fordon.FordonID == selectedFordonID);
-
-                // Fyll i textrutorna med fordonets aktuella data
-                if (valtFordon != null)
-                {
-                    txtFordonID.Text = valtFordon.FordonID.ToString();
-                    txtTyp.Text = valtFordon.Typ;
-                    txtBatteriNivå.Text = valtFordon.BatteriNivå.ToString();
-                    txtStatus.Text = valtFordon.Status;
-                }
-            }
+            UppdateraFordonLista(valdStation);
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
     }
+
+
 }

@@ -19,7 +19,7 @@ namespace TestLabb2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new Upddatera().Show();
+            new HanteraStation().Show();
             this.Hide();
         }
 
@@ -30,8 +30,11 @@ namespace TestLabb2
 
         private void EfterLogIN_Click(object sender, EventArgs e)
         {
-            new LäggTillFordon().Show();
+            new FordonHantering().Show();
             this.Hide();
+            MessageBox.Show("1. Vid Uppdatering måste du fylla i alla fält och klicka på FordonID. " +
+                "\n 2. För att ta bort måste du klicka på ForodonID och fylla i ForodonID fältet.");
+            
         }
 
         private void label3_Click(object sender, EventArgs e)

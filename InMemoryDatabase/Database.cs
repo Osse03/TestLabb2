@@ -1,17 +1,21 @@
 ﻿using Entiteter;
 
+
 namespace InMemoryDatabase
 {
     public class Database
     {
 
-        internal List<Fordon> Fordons = new List<Fordon> ();
-        internal List<Station> Stations = new List<Station> ();
-        internal List<Hyra> Hyras = new List<Hyra> ();
-        internal List<Användare> Användares = new List<Användare> ();
-        internal List<SystemAdmin> SystemAdmins = new List<SystemAdmin> ();
-        internal List<Person> Persons = new List<Person> ();
+        internal List<Fordon> Fordons = new List<Fordon>();
+        public List<Station> Stations = new List<Station>();
+        internal List<Hyra> Hyras = new List<Hyra>();
+        internal List<Användare> Användares = new List<Användare>();
+        internal List<SystemAdmin> SystemAdmins = new List<SystemAdmin>();
+        internal List<Person> Persons = new List<Person>();
+        public void Spara()
+        {
 
+        }
         public List<Användare> HämtaAnvändare()
         {
             return Användares;
@@ -20,9 +24,9 @@ namespace InMemoryDatabase
         public void LäggTillAnvändare(Användare användare)
         {
             Användares.Add(användare);
-        } 
+        }
 
-        public void  InitieraAnvändare()
+        public void InitieraAnvändare()
         {
             if (Användares.Count == 0)
             {
@@ -66,7 +70,7 @@ namespace InMemoryDatabase
                 });
             }
 
-    
+
         }
 
         public List<SystemAdmin> InitieraSystemAdmin()
@@ -95,27 +99,22 @@ namespace InMemoryDatabase
 
 
             };
-            
+
             return systemAdmins;
 
         }
-
-
-
-        public List<Fordon> HämtaFordon()
+       
+        // för att skapa station en gång!!
+        public Database()
         {
-            return HämtaStation().SelectMany(station => station.BefintligaFordon).ToList();
-
-        }
-        public List<Station> HämtaStation()
-        {
-            List<Station> stations = new List<Station>()
+            // Initiera stationer EN GÅNG
+            Stations = new List<Station>
             {
                 new Station
                 {
                     StationID = 1,
                     Adress = "Göteborg",
-                    AnatalFodon = 3,
+                    AntalFodon = 3,
                     BefintligaFordon = new List<Fordon>
                     {
                        new Fordon
@@ -154,7 +153,7 @@ namespace InMemoryDatabase
                 {
                     StationID = 2,
                     Adress = "Borås",
-                    AnatalFodon = 3,
+                    AntalFodon = 3,
                     BefintligaFordon = new List<Fordon>
                     {
                          new Fordon
@@ -179,11 +178,11 @@ namespace InMemoryDatabase
 
                 },
 
-                 new Station
+                new Station
                 {
                     StationID = 3,
                     Adress = "Uppsala",
-                    AnatalFodon = 3,
+                    AntalFodon = 3,
                     BefintligaFordon = new List<Fordon>
                     {
                        new Fordon
@@ -206,11 +205,11 @@ namespace InMemoryDatabase
                     }
                 },
 
-                 new Station
+                new Station
                 {
                     StationID = 4,
                     Adress = "Jokkmokk",
-                    AnatalFodon = 3,
+                    AntalFodon = 3,
                     BefintligaFordon = new List<Fordon>
                     {
                          new Fordon
@@ -247,18 +246,26 @@ namespace InMemoryDatabase
 
                          },
                     }
-
-                },
-
-
+                }
             };
+        }
 
-            return stations;
+        public List<Station> HämtaStation()
+        {
+            return Stations; // Returnera samma stationer
         }
 
 
-
-
-
     }
+
+
+
+
+   
+
+
+
+
+
+    
 }
