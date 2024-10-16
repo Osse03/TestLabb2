@@ -63,7 +63,7 @@ namespace InMemoryDatabase
                          {
                                HyraID = "H001",
                                Kostnad = 75.00,
-                              StartTid = DateTime.Now.AddMonths(-2),
+                               StartTid = DateTime.Now.AddMonths(-2),
                                  SlutTid = DateTime.Now
                          }
                     }
@@ -119,6 +119,7 @@ namespace InMemoryDatabase
                     {
                        new Fordon
                        {
+
                            FordonID = 1,
                           Typ ="El Scoter",
                            BatteriNivå = 80,

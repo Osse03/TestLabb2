@@ -48,8 +48,10 @@ namespace TestLabb2
             else if (systemAdmin != null)
             {
 
-                new SystemAdminMeny().Show();
+                new FordonHantering().Show();
                 this.Hide();
+                MessageBox.Show("1. Vid Uppdatering måste du fylla i alla fält och klicka på FordonID. " +
+                    "\n 2. För att ta bort måste du klicka på ForodonID och fylla i ForodonID fältet.");
             }
             else
             {

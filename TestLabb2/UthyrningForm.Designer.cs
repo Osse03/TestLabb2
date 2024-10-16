@@ -37,47 +37,53 @@
             // 
             // txtAnvändarnamn
             // 
-            txtAnvändarnamn.Location = new Point(253, 52);
+            txtAnvändarnamn.Location = new Point(221, 39);
+            txtAnvändarnamn.Margin = new Padding(3, 2, 3, 2);
             txtAnvändarnamn.Name = "txtAnvändarnamn";
-            txtAnvändarnamn.Size = new Size(162, 27);
+            txtAnvändarnamn.Size = new Size(142, 23);
             txtAnvändarnamn.TabIndex = 0;
             // 
             // txtFordonID
             // 
-            txtFordonID.Location = new Point(253, 156);
+            txtFordonID.Location = new Point(221, 117);
+            txtFordonID.Margin = new Padding(3, 2, 3, 2);
             txtFordonID.Name = "txtFordonID";
-            txtFordonID.Size = new Size(162, 27);
+            txtFordonID.Size = new Size(142, 23);
             txtFordonID.TabIndex = 1;
             txtFordonID.TextChanged += textBox2_TextChanged;
             // 
             // btnHyra
             // 
-            btnHyra.Location = new Point(253, 244);
+            btnHyra.Location = new Point(221, 183);
+            btnHyra.Margin = new Padding(3, 2, 3, 2);
             btnHyra.Name = "btnHyra";
-            btnHyra.Size = new Size(168, 29);
+            btnHyra.Size = new Size(147, 22);
             btnHyra.TabIndex = 2;
             btnHyra.Text = "Hyra Fordon";
             btnHyra.UseVisualStyleBackColor = true;
+            btnHyra.Click += btnHyra_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Screenshot_2024_10_11_000153;
-            pictureBox1.Location = new Point(559, 0);
+            pictureBox1.Location = new Point(489, 0);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(254, 199);
+            pictureBox1.Size = new Size(222, 149);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             // 
             // UthyrningForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(806, 460);
+            ClientSize = new Size(705, 345);
             Controls.Add(pictureBox1);
             Controls.Add(btnHyra);
             Controls.Add(txtFordonID);
             Controls.Add(txtAnvändarnamn);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "UthyrningForm";
             Text = "UthyrningForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

@@ -26,5 +26,10 @@ namespace TestLabb2
         {
 
         }
+
+        private void btnHyra_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
