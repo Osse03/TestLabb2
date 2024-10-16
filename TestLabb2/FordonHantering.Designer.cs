@@ -45,6 +45,7 @@
             LäggTillFordn = new Button();
             TabortFordon = new Button();
             pictureBox1 = new PictureBox();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -227,11 +228,23 @@
             pictureBox1.TabIndex = 28;
             pictureBox1.TabStop = false;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Guttman-CourMir", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 177);
+            label8.ForeColor = Color.SeaGreen;
+            label8.Location = new Point(147, 30);
+            label8.Name = "label8";
+            label8.Size = new Size(426, 38);
+            label8.TabIndex = 29;
+            label8.Text = "LET'S GET WORK DONE";
+            // 
             // FordonHantering
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(751, 599);
+            Controls.Add(label8);
             Controls.Add(pictureBox1);
             Controls.Add(TabortFordon);
             Controls.Add(LäggTillFordn);
@@ -277,5 +290,6 @@
         private Button LäggTillFordn;
         private Button TabortFordon;
         private PictureBox pictureBox1;
+        private Label label8;
     }
 }

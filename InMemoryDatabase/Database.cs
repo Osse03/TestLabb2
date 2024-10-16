@@ -12,10 +12,6 @@ namespace InMemoryDatabase
         internal List<Användare> Användares = new List<Användare>();
         internal List<SystemAdmin> SystemAdmins = new List<SystemAdmin>();
         internal List<Person> Persons = new List<Person>();
-        public void Spara()
-        {
-
-        }
         public List<Användare> HämtaAnvändare()
         {
             return Användares;
