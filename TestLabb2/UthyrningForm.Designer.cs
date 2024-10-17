@@ -35,7 +35,6 @@
             listFordon = new ListView();
             btnHyra = new Button();
             btnAvslutaHyra = new Button();
-            listHyreshistorik = new ListView();
             lblFullNamn = new Label();
             lblEpost = new Label();
             SuspendLayout();
@@ -124,16 +123,6 @@
             btnAvslutaHyra.UseVisualStyleBackColor = false;
             btnAvslutaHyra.Click += AvslutaHyra_Click;
             // 
-            // listHyreshistorik
-            // 
-            listHyreshistorik.GridLines = true;
-            listHyreshistorik.Location = new Point(20, 80);
-            listHyreshistorik.Name = "listHyreshistorik";
-            listHyreshistorik.Size = new Size(500, 200);
-            listHyreshistorik.TabIndex = 0;
-            listHyreshistorik.UseCompatibleStateImageBehavior = false;
-            listHyreshistorik.View = View.Details;
-            // 
             // lblFullNamn
             // 
             lblFullNamn.Font = new Font("Bell MT", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -150,7 +139,7 @@
             lblEpost.Name = "lblEpost";
             lblEpost.Size = new Size(0, 19);
             lblEpost.TabIndex = 27;
-            // 
+            //
             // UthyrningForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -158,7 +147,6 @@
             ClientSize = new Size(780, 586);
             Controls.Add(lblEpost);
             Controls.Add(lblFullNamn);
-            Controls.Add(listHyreshistorik);
             Controls.Add(btnAvslutaHyra);
             Controls.Add(btnHyra);
             Controls.Add(label1);
@@ -184,9 +172,9 @@
         private ListView listFordon;
         private Button btnHyra;
         private Button btnAvslutaHyra;
-        private ListView listHyreshistorik;
         private Label label4;
         private Label lblEpost;
         private Label lblFullNamn;
+
     }
 }
