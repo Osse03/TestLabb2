@@ -14,27 +14,11 @@ namespace TestLabb2
             InitializeComponent();
            this.database = db;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             var användareLista = database.HämtaAnvändare();
 
-            var inloggadAnvändare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
+            var inloggadAnvändare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text); //  hämtar den inloggade användare för hyrningsprocess 
 
             var systemAdminLista = database.InitieraSystemAdmin();
           
@@ -78,21 +62,11 @@ namespace TestLabb2
             Application.Exit();
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void RänsaFält_Click(object sender, EventArgs e)
         {
             textNamn.Clear();
             textLösenord.Clear();
             textNamn.Focus();
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void VissaNyLösenord_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void VisaLösenord_CheckedChanged(object sender, EventArgs e)

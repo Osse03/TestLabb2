@@ -147,10 +147,6 @@ namespace TestLabb2
                 listStationer.Items.Add(item);
             }
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
         private void btnHyra_Click_1(object sender, EventArgs e)
         {  
@@ -243,6 +239,14 @@ namespace TestLabb2
 
             // Återställ hyresdata
             aktuellHyra = null;
+        }
+
+
+
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -17,15 +17,6 @@ namespace Entiteter
         public Fordon Fordon { get; set; }
 
 
-
-
-
-
     }
-
-
-
-
-
 
 }

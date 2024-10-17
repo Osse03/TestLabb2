@@ -43,7 +43,7 @@ namespace TestLabb2
             label3 = new Label();
             textNamn = new TextBox();
             textLösenord = new TextBox();
-            label4 = new Label();
+            RänsaFält = new Label();
             label5 = new Label();
             label6 = new Label();
             textVisaLösenord = new CheckBox();
@@ -171,18 +171,18 @@ namespace TestLabb2
             textLösenord.Size = new Size(188, 25);
             textLösenord.TabIndex = 12;
             // 
-            // label4
+            // RänsaFält
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.White;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.Green;
-            label4.Location = new Point(149, 423);
-            label4.Name = "label4";
-            label4.Size = new Size(75, 20);
-            label4.TabIndex = 13;
-            label4.Text = "Rensa Fält";
-            label4.Click += label4_Click;
+            RänsaFält.AutoSize = true;
+            RänsaFält.BackColor = Color.White;
+            RänsaFält.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RänsaFält.ForeColor = Color.Green;
+            RänsaFält.Location = new Point(149, 423);
+            RänsaFält.Name = "RänsaFält";
+            RänsaFält.Size = new Size(75, 20);
+            RänsaFält.TabIndex = 13;
+            RänsaFält.Text = "Rensa Fält";
+            RänsaFält.Click += RänsaFält_Click;
             // 
             // label5
             // 
@@ -230,7 +230,7 @@ namespace TestLabb2
             Controls.Add(textVisaLösenord);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(label4);
+            Controls.Add(RänsaFält);
             Controls.Add(textLösenord);
             Controls.Add(textNamn);
             Controls.Add(label3);
@@ -266,7 +266,7 @@ namespace TestLabb2
         private Label label3;
         private TextBox textNamn;
         private TextBox textLösenord;
-        private Label label4;
+        private Label RänsaFält;
         private Label label5;
         private Label label6;
         private CheckBox textVisaLösenord;
