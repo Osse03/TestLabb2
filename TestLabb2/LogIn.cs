@@ -1,4 +1,5 @@
 using InMemoryDatabase;
+using Entiteter;
 
 namespace TestLabb2
 {
@@ -6,6 +7,8 @@ namespace TestLabb2
     {
        
         private Database database = new Database();
+        private Användare inloggadAnvändare;
+
         public LogIn(Database db)
         {
             InitializeComponent();
@@ -29,20 +32,21 @@ namespace TestLabb2
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var NyAnvändareLista = database.HämtaAnvändare();
-            var SystemAdminLista = database.InitieraSystemAdmin();
+            var användareLista = database.HämtaAnvändare();
+
+            var inloggadAnvändare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
+
+            var systemAdminLista = database.InitieraSystemAdmin();
           
 
-            var Nyanvändare = NyAnvändareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
-            var systemAdmin = SystemAdminLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
+            var Nyanvändare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
+            var systemAdmin = systemAdminLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
 
 
             if (Nyanvändare != null)
             {
-                MessageBox.Show($"Du är inloggad");
+                new UthyrningForm(database, inloggadAnvändare).Show();
                 this.Hide();
-                //new ().Show();
-                //this.Hide();
 
             }
             else if (systemAdmin != null)
@@ -55,7 +59,7 @@ namespace TestLabb2
             }
             else
             {
-                MessageBox.Show("Din namn eller lösenord är fel, försök igen");
+                MessageBox.Show("Din full namn eller lösenord är fel, försök igen");
                 textNamn.Clear();
                 textLösenord.Clear();
                 textNamn.Focus();

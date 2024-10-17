@@ -99,13 +99,15 @@ namespace InMemoryDatabase
             return systemAdmins;
 
         }
-       
+
         // för att skapa station en gång!!
         public Database()
         {
             // Initiera stationer EN GÅNG
             Stations = new List<Station>
             {
+             #region Göteborg Station
+
                 new Station
                 {
                     StationID = 1,
@@ -145,7 +147,10 @@ namespace InMemoryDatabase
                         },
                     }
                 },
+                #endregion
 
+
+             #region Borås Station
                 new Station
                 {
                     StationID = 2,
@@ -174,7 +179,10 @@ namespace InMemoryDatabase
                     }
 
                 },
+                #endregion
 
+
+            #region Uppsala Station
                 new Station
                 {
                     StationID = 3,
@@ -201,7 +209,9 @@ namespace InMemoryDatabase
                       },
                     }
                 },
+                #endregion
 
+            #region Jokkmokk Station
                 new Station
                 {
                     StationID = 4,
@@ -244,6 +254,7 @@ namespace InMemoryDatabase
                          },
                     }
                 }
+           #endregion
             };
         }
 
@@ -258,7 +269,7 @@ namespace InMemoryDatabase
 
 
 
-   
+
 
 
 
