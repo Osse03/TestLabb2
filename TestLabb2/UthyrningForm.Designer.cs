@@ -126,14 +126,13 @@
             // 
             // listHyreshistorik
             // 
-            this.listHyreshistorik.Location = new System.Drawing.Point(20, 80);
-            this.listHyreshistorik.Size = new System.Drawing.Size(500, 200); // Ställ in storlek
-            this.listHyreshistorik.View = View.Details;
-            this.listHyreshistorik.Columns.Add("HyraID", 100);
-            this.listHyreshistorik.Columns.Add("Starttid", 150);
-            this.listHyreshistorik.Columns.Add("Sluttid", 150);
-            this.listHyreshistorik.Columns.Add("Kostnad", 100);
-            this.Controls.Add(this.listHyreshistorik);
+            listHyreshistorik.GridLines = true;
+            listHyreshistorik.Location = new Point(20, 80);
+            listHyreshistorik.Name = "listHyreshistorik";
+            listHyreshistorik.Size = new Size(500, 200);
+            listHyreshistorik.TabIndex = 0;
+            listHyreshistorik.UseCompatibleStateImageBehavior = false;
+            listHyreshistorik.View = View.Details;
             // 
             // lblFullNamn
             // 
@@ -174,10 +173,6 @@
             Load += UthyrningForm_Load;
             ResumeLayout(false);
             PerformLayout();
-
-
-            this.Load += new EventHandler(UthyrningForm_Load);
-
         }
 
         #endregion
