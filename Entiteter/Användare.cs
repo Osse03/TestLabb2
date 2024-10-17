@@ -13,16 +13,5 @@ namespace Entiteter
         public List<Hyra> HyresHistorik { get; set; }
 
 
-        //public Användare(string användareID,string fullNamn, string lösenOrd, string ePost, string betalningsmetod, List<Hyra> hyresHistorik)
-        //{
-        //    this.AnvändareID = användareID;
-        //    this.FullNamn = fullNamn;
-        //    this.Lösenord = lösenOrd;
-        //    this.Epost = ePost;
-        //    this.BetalningsMetod = betalningsmetod;
-        //    this.HyresHistorik = hyresHistorik;
-            
-            
-        //}
     }
 }
