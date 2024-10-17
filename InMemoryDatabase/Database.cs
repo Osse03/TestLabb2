@@ -12,6 +12,16 @@ namespace InMemoryDatabase
         internal List<Användare> Användares = new List<Användare>();
         internal List<SystemAdmin> SystemAdmins = new List<SystemAdmin>();
         internal List<Person> Persons = new List<Person>();
+
+        private static int nästaHyraID = 2;  // Startar från 2 och ökar för varje ny hyra
+
+        // Andra delar av din databas-klass
+
+        public static int GenereraNyHyraID()
+        {
+            return nästaHyraID++;
+        }
+
         public List<Användare> HämtaAnvändare()
         {
             return Användares;
@@ -37,7 +47,7 @@ namespace InMemoryDatabase
                     {
                          new Hyra
                          {
-                             HyraID = "H000",
+                             HyraID = 1,
                              Kostnad = 55.95,
                               StartTid = DateTime.Now.AddMonths(-1),
                               SlutTid = DateTime.Now
@@ -57,10 +67,10 @@ namespace InMemoryDatabase
                     {
                          new Hyra
                          {
-                               HyraID = "H001",
-                               Kostnad = 75.00,
+                               HyraID = 1,
+                               Kostnad = 200.10,
                                StartTid = DateTime.Now.AddMonths(-2),
-                                 SlutTid = DateTime.Now
+                                SlutTid = DateTime.Now
                          }
                     }
                 });
@@ -121,7 +131,7 @@ namespace InMemoryDatabase
                            FordonID = 1,
                           Typ ="El Scoter",
                            BatteriNivå = 80,
-                            Status = "Tillgänglig"
+                            Status = "Laddar"
 
                        },
 
@@ -136,19 +146,9 @@ namespace InMemoryDatabase
 
 
 
-                        new Fordon
-                         {
-                           FordonID = 3,
-                           Typ ="El Cykel",
-                           BatteriNivå = 20,
-                           Status = "Laddar"
-
-
-                        },
                     }
                 },
                 #endregion
-
 
              #region Borås Station
                 new Station
@@ -163,24 +163,30 @@ namespace InMemoryDatabase
                             FordonID = 1,
                             Typ ="El Scoter",
                             BatteriNivå = 80,
+                            Status = "Laddar"
+
+                         },
+                         new Fordon
+                         {
+                            FordonID = 2,
+                            Typ ="El Scoter",
+                            BatteriNivå = 0,
+                            Status = "Underhåll"
+
+                         },
+                          new Fordon
+                         {
+                            FordonID = 2,
+                            Typ ="El Scoter",
+                            BatteriNivå = 100,
                             Status = "Tillgänglig"
 
                          },
 
-                         new Fordon
-                         {
-                           FordonID = 2,
-                           Typ ="El Cykel",
-                           BatteriNivå = 20,
-                           Status = "Laddar"
-
-
-                         },
                     }
 
                 },
                 #endregion
-
 
             #region Uppsala Station
                 new Station
@@ -241,7 +247,7 @@ namespace InMemoryDatabase
                             FordonID = 3,
                             Typ ="El Scoter",
                             BatteriNivå = 80,
-                            Status = "Tillgänglig"
+                            Status = "Laddar"
 
                          },
                          new Fordon
@@ -255,6 +261,8 @@ namespace InMemoryDatabase
                     }
                 }
            #endregion
+
+
             };
         }
 

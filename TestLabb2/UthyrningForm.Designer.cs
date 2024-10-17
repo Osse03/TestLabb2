@@ -37,6 +37,7 @@
             btnAvslutaHyra = new Button();
             lblFullNamn = new Label();
             lblEpost = new Label();
+            listHyreshistorik = new ListView();
             SuspendLayout();
             // 
             // label1
@@ -102,31 +103,31 @@
             btnHyra.BackColor = Color.SeaGreen;
             btnHyra.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHyra.ForeColor = Color.White;
-            btnHyra.Location = new Point(211, 312);
+            btnHyra.Location = new Point(20, 293);
             btnHyra.Name = "btnHyra";
             btnHyra.Size = new Size(104, 33);
             btnHyra.TabIndex = 24;
             btnHyra.Text = "Hyra";
             btnHyra.UseVisualStyleBackColor = false;
-            btnHyra.Click += Hyra_Click;
+            btnHyra.Click += btnHyra_Click_1;
             // 
             // btnAvslutaHyra
             // 
             btnAvslutaHyra.BackColor = Color.SeaGreen;
             btnAvslutaHyra.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAvslutaHyra.ForeColor = Color.White;
-            btnAvslutaHyra.Location = new Point(344, 312);
+            btnAvslutaHyra.Location = new Point(302, 293);
             btnAvslutaHyra.Name = "btnAvslutaHyra";
             btnAvslutaHyra.Size = new Size(104, 33);
             btnAvslutaHyra.TabIndex = 25;
             btnAvslutaHyra.Text = "Avsluta Hyra";
             btnAvslutaHyra.UseVisualStyleBackColor = false;
-            btnAvslutaHyra.Click += AvslutaHyra_Click;
+            btnAvslutaHyra.Click += btnAvslutaHyra_Click_1;
             // 
             // lblFullNamn
             // 
             lblFullNamn.Font = new Font("Bell MT", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFullNamn.Location = new Point(12, 9);
+            lblFullNamn.Location = new Point(20, 9);
             lblFullNamn.Name = "lblFullNamn";
             lblFullNamn.Size = new Size(100, 23);
             lblFullNamn.TabIndex = 0;
@@ -139,12 +140,24 @@
             lblEpost.Name = "lblEpost";
             lblEpost.Size = new Size(0, 19);
             lblEpost.TabIndex = 27;
-            //
+            // 
+            // listHyreshistorik
+            // 
+            listHyreshistorik.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            listHyreshistorik.GridLines = true;
+            listHyreshistorik.Location = new Point(12, 72);
+            listHyreshistorik.Name = "listHyreshistorik";
+            listHyreshistorik.Size = new Size(424, 184);
+            listHyreshistorik.TabIndex = 28;
+            listHyreshistorik.UseCompatibleStateImageBehavior = false;
+            listHyreshistorik.View = View.Details;
+            // 
             // UthyrningForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(780, 586);
+            Controls.Add(listHyreshistorik);
             Controls.Add(lblEpost);
             Controls.Add(lblFullNamn);
             Controls.Add(btnAvslutaHyra);
@@ -157,6 +170,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
             Name = "UthyrningForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "UthyrningForm";
             Load += UthyrningForm_Load;
             ResumeLayout(false);
@@ -175,6 +189,6 @@
         private Label label4;
         private Label lblEpost;
         private Label lblFullNamn;
-
+        private ListView listHyreshistorik;
     }
 }

@@ -8,7 +8,7 @@ namespace Entiteter
 {
     public class Hyra
     {
-        public string HyraID { get; set; }
+        public int HyraID { get; set; }
         public DateTime StartTid { get; set; }
         public DateTime SlutTid { get; set; }
         public double Kostnad { get; set; }

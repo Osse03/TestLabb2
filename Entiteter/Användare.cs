@@ -12,6 +12,5 @@ namespace Entiteter
         public  string BetalningsMetod { get; set; }
         public List<Hyra> HyresHistorik { get; set; }
 
-
     }
 }

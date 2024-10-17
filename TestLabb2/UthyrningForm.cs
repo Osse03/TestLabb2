@@ -35,19 +35,24 @@ namespace TestLabb2
                 this.Close();  // Stäng formuläret om ingen användare är inloggad
                 return;
             }
-
             // Visa användarens uppgifter
             lblFullNamn.Text = $"Namn: {inloggadAnvändare.FullNamn}";
             lblEpost.Text = $"E-post: {inloggadAnvändare.Epost}";
+
+
+            listHyreshistorik.Columns.Add("HyraID", 100);
+            listHyreshistorik.Columns.Add("Starttid", 150);
+            listHyreshistorik.Columns.Add("Sluttid", 150);
+            listHyreshistorik.Columns.Add("Kostnad", 100);
 
             // Töm listan och visa hyreshistoriken
             listHyreshistorik.Items.Clear();
             foreach (var hyra in inloggadAnvändare.HyresHistorik)
             {
-                ListViewItem item = new ListViewItem(hyra.HyraID);
+                ListViewItem item = new ListViewItem(hyra.HyraID.ToString()); // Konvertera int till string
                 item.SubItems.Add(hyra.StartTid.ToString());
                 item.SubItems.Add(hyra.SlutTid.ToString());
-                item.SubItems.Add(hyra.Kostnad.ToString("F2"));
+                item.SubItems.Add(hyra.Kostnad.ToString("F2")); // Konvertera decimal till string med 2 decimaler
                 listHyreshistorik.Items.Add(item);
             }
         }
@@ -74,6 +79,7 @@ namespace TestLabb2
             }
         }
 
+
         private void listStationer_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listStationer.SelectedItems.Count > 0)
@@ -85,7 +91,7 @@ namespace TestLabb2
                 {
                     listFordon.Items.Clear();
 
-                    foreach (var fordon in station.BefintligaFordon.Where(f => f.Status == "Tillgänglig"))
+                    foreach (var fordon in station.BefintligaFordon)
                     {
                         ListViewItem fordonItem = new ListViewItem(fordon.FordonID.ToString());
                         fordonItem.SubItems.Add(fordon.Typ);
@@ -98,124 +104,145 @@ namespace TestLabb2
 
         }
 
-        private void Hyra_Click(object sender, EventArgs e)
+        private void UppdateraFordon(Station valdStation)
         {
-            // Kontrollera om användaren redan har en aktiv hyra
-            var aktivHyra = inloggadAnvändare.HyresHistorik.FirstOrDefault(h => h.SlutTid == null);
-            if (aktivHyra != null)
+            listFordon.Items.Clear();
+
+            foreach (var fordon in valdStation.BefintligaFordon)
             {
-                MessageBox.Show("Du har redan en aktiv hyra. Avsluta den innan du hyr ett nytt fordon.");
-                return;
-            }
-
-            // Fortsätt med att hyra fordonet om ingen aktiv hyra finns
-            if (listFordon.SelectedItems.Count > 0)
-            {
-                int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
-                int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
-
-                var station = database.HämtaStation().FirstOrDefault(s => s.StationID == selectedStationID);
-                var fordon = station.BefintligaFordon.FirstOrDefault(f => f.FordonID == selectedFordonID);
-
-                if (fordon != null && fordon.Status == "Tillgänglig")
-                {
-                    // Skapa ny hyra
-                    aktuellHyra = new Hyra
-                    {
-                        HyraID = Guid.NewGuid().ToString(),
-                        StartTid = DateTime.Now,
-                        Användare = inloggadAnvändare,
-                        Fordon = fordon
-                    };
-
-                    // Uppdatera fordonets status
-                    fordon.Status = "Upptaget";
-                    MessageBox.Show("Du har hyrt fordonet!");
-
-                    // Uppdatera listan med fordon
-                    listFordon.Items.Remove(listFordon.SelectedItems[0]);
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("Välj ett fordon att hyra.");
-            }
-        }
-        private void AvslutaHyra_Click(object sender, EventArgs e)
-        {
-            if (aktuellHyra != null)
-            {
-                // Ange sluttid och beräkna kostnad
-                aktuellHyra.SlutTid = DateTime.Now;
-
-                double timmar = (aktuellHyra.SlutTid - aktuellHyra.StartTid).TotalHours;
-
-                aktuellHyra.Kostnad = timmar * 100;  // Exempelpris 100 kr per timme
-
-                // Uppdatera fordonets status till "Tillgänglig"
-                aktuellHyra.Fordon.Status = "Tillgänglig";
-
-                // Lägga till hyra i användarens historik
-                inloggadAnvändare.HyresHistorik.Add(aktuellHyra);
-
-                // Fråga användaren vilken station fordonet ska lämnas vid
-                var stationer = database.HämtaStation();
-                string stationLista = string.Join("\n", stationer.Select(s => $"{s.StationID} - {s.Adress}").ToArray());
-                string valdStationID = Microsoft.VisualBasic.Interaction.InputBox($"Välj station att lämna fordonet:\n{stationLista}", "Lämna Fordon", "1");
-
-                if (int.TryParse(valdStationID, out int stationID))
-                {
-                    var valdStation = stationer.FirstOrDefault(s => s.StationID == stationID);
-                    if (valdStation != null)
-                    {
-                        valdStation.BefintligaFordon.Add(aktuellHyra.Fordon);
-
-                        // Visa meddelande med kostnad och var fordonet lämnades
-                        MessageBox.Show($"Hyran är avslutad. Kostnad: {aktuellHyra.Kostnad} SEK.\nFordonet har lämnats vid {valdStation.Adress}.");
-
-                        // Återställ hyresdata
-                        aktuellHyra = null;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ogiltig station. Försök igen.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Ogiltig inmatning. Försök igen.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Du har ingen aktiv hyra att avsluta.");
+                ListViewItem item = new ListViewItem(fordon.FordonID.ToString());
+                item.SubItems.Add(fordon.Typ);
+                item.SubItems.Add(fordon.BatteriNivå.ToString());
+                item.SubItems.Add(fordon.Status);
+                listFordon.Items.Add(item);
             }
         }
 
+        // Metod för att uppdatera hyreshistorik
+        private void UppdateraHyreshistorik()
+        {
+            listHyreshistorik.Items.Clear();
 
+            foreach (var hyra in inloggadAnvändare.HyresHistorik)
+            {
+                ListViewItem item = new ListViewItem(hyra.HyraID.ToString());
+                item.SubItems.Add(hyra.StartTid.ToString());
+                item.SubItems.Add(hyra.SlutTid.ToString());
+                item.SubItems.Add(hyra.Kostnad.ToString("F2"));  
+                listHyreshistorik.Items.Add(item);
+            }
+        }
 
+        // Metod för att uppdatera stationens lista
+        private void UppdateraStationer()
+        {
+            listStationer.Items.Clear();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            var stationer = database.HämtaStation();
+            foreach (var station in stationer)
+            {
+                ListViewItem item = new ListViewItem(station.StationID.ToString());
+                item.SubItems.Add(station.Adress);
+                item.SubItems.Add(station.BefintligaFordon.Count.ToString());  // Dynamisk fordonsräkning
+                listStationer.Items.Add(item);
+            }
+        }
         private void label1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        private void btnHyra_Click_1(object sender, EventArgs e)
+        {  
+            
+            // Kontrollera att både en station och ett fordon har valts
+            if (listStationer.SelectedItems.Count > 0 && listFordon.SelectedItems.Count > 0)
+            {
+                // Hämta det valda station-ID och fordon-ID från listorna
+                int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
+                int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
 
+                // Hämta vald station baserat på stationID
+                var stationer = database.HämtaStation();
+                var valdStation = stationer.FirstOrDefault(s => s.StationID == selectedStationID);
+
+                if (valdStation != null)
+                {
+                    // Hämta valt fordon från stationens fordonslista
+                    var valtFordon = valdStation.BefintligaFordon.FirstOrDefault(f => f.FordonID == selectedFordonID);
+
+                    if (valtFordon != null)
+                    {
+                        // Skapa en ny hyra och koppla fordonet till användaren
+                        aktuellHyra = new Hyra
+                        {
+                            HyraID = Database.GenereraNyHyraID(),  // Genererar ett unikt HyraID
+                            StartTid = DateTime.Now,
+                            Fordon = valtFordon
+                        };
+
+                        // Ta bort fordonet från stationens tillgängliga fordon
+                        valdStation.BefintligaFordon.Remove(valtFordon);
+
+                        // Uppdatera listorna
+                        UppdateraStationer();
+                        UppdateraFordon(valdStation);
+
+                        MessageBox.Show($"Du har hyrt {valtFordon.Typ}.", "Hyra lyckades");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vänligen välj både en station och ett fordon.", "Fel");
+            }
+
+
+        }
+
+        private void btnAvslutaHyra_Click_1(object sender, EventArgs e)
+        {
+            if (aktuellHyra == null)
+            {
+                MessageBox.Show("Du har ingen aktiv hyra att avsluta.", "Fel");
+                return;
+            }
+
+            // Sätt sluttiden och beräkna kostnaden
+            aktuellHyra.SlutTid = DateTime.Now;
+            double timmar = (aktuellHyra.SlutTid - aktuellHyra.StartTid).TotalHours;
+            aktuellHyra.Kostnad = timmar * 100; // Exempelpris 100 kr per timme
+
+            // Lägg till hyran till användarens hyreshistorik
+            inloggadAnvändare.HyresHistorik.Add(aktuellHyra);
+
+            // Uppdatera hyreshistoriken i gränssnittet
+            UppdateraHyreshistorik();
+
+            // Återställ hyresdata och uppdatera stationens fordonslista
+            aktuellHyra.Fordon.Status = "Tillgänglig";
+            var stationer = database.HämtaStation();
+            string stationLista = string.Join("\n", stationer.Select(s => $"{s.StationID} - {s.Adress}").ToArray());
+            string valdStationID = Microsoft.VisualBasic.Interaction.InputBox($"Välj station att lämna fordonet:\n{stationLista}", "Lämna Fordon", "1");
+
+            if (int.TryParse(valdStationID, out int stationID))
+            {
+                var valdStation = stationer.FirstOrDefault(s => s.StationID == stationID);
+                if (valdStation != null)
+                {
+                    // Lägg till fordonet till vald station
+                    valdStation.BefintligaFordon.Add(aktuellHyra.Fordon);
+
+                    // Uppdatera stationens lista och fordon
+                    UppdateraStationer();
+                    UppdateraFordon(valdStation);
+
+                    MessageBox.Show($"Hyran är avslutad. Kostnad: {aktuellHyra.Kostnad} SEK.", "Hyra avslutad");
+                }
+            }
+
+            // Återställ hyresdata
+            aktuellHyra = null;
+        }
     }
 }
