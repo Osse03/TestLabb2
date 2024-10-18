@@ -15,53 +15,40 @@ namespace TestLabb2
     public partial class SkapaKonto : Form
     {
 
-        private Database database;
-        public SkapaKonto(Database db)
+        private LogicLayer _logicLayer;
+
+        // Uppdaterad konstruktor som tar emot LogicLayer
+        public SkapaKonto(LogicLayer logicLayer)
         {
             InitializeComponent();
-
-            database = db;
+            _logicLayer = logicLayer;  // Tilldela LogicLayer till den privata variabeln
         }
 
 
         private void label8_Click(object sender, EventArgs e)
         {
-            new LogIn(database).Show();
+            new LogIn(_logicLayer).Show();
             this.Hide();
         }
 
         private void REGISTERA_Click(object sender, EventArgs e)
         {
-            string fullNamn = textNewUserName.Text;
-            string epost = textEpost.Text;
-            string användareID = textNewUserName.Text;
-            string betalningsMetod = textBetalningsMetod.Text;
-            string lösenOrd = textNyttLösenord.Text;
-            string rättLösen = textRättLösenord.Text;
-
-            if (lösenOrd != rättLösen)
+            // Skapa en ny användare baserat på inmatad data
+            var nyAnvändare = new Användare
             {
-                MessageBox.Show("Lösenorden matchar inte. Försök igen");
-                return;
-            }
-
-            if (textNewUserName.Text == "" && textEpost.Text == "" && textBetalningsMetod.Text == "" && textBetalningsMetod.Text == "" && textNyttLösenord.Text == "")
-            {
-                MessageBox.Show("Vissa fält är tomt. Fyll på alla information");
-            }
-
-            Användare nyAnvändare = new Användare
-            {
-                FullNamn = fullNamn,
-                Epost = epost,
-                AnvändareID = användareID,
-                BetalningsMetod = betalningsMetod,
-                Lösenord = lösenOrd
+                FullNamn = textNewUserName.Text,
+                Epost = textEpost.Text,
+                AnvändareID = textAnvändareID.Text, // Antag att det finns en TextBox för AnvändareID
+                BetalningsMetod = textBetalningsMetod.Text, // TextBox för BetalningsMetod
+                Lösenord = textNyttLösenord.Text
             };
 
-            database.LäggTillAnvändare(nyAnvändare);
+            // Kalla på LogicLayer för att lägga till den nya användaren
+            _logicLayer.LäggTillNyAnvändare(nyAnvändare);
 
-            MessageBox.Show("Ny användare är registrerad!");
+            MessageBox.Show("Ny användare har skapats!");
+
+            // Töm fälten efter registrering
             textNewUserName.Clear();
             textEpost.Clear();
             textBetalningsMetod.Clear();
@@ -69,9 +56,6 @@ namespace TestLabb2
             textNyttLösenord.Clear();
             textRättLösenord.Clear();
             textNewUserName.Focus();
-
-
-
         }
 
         private void label2_Click(object sender, EventArgs e)

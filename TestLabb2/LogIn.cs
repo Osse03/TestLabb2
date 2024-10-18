@@ -5,56 +5,52 @@ namespace TestLabb2
 {
     public partial class LogIn : Form
     {
-       
-        private Database database = new Database();
+
+        private LogicLayer logicLayer;
         private Användare inloggadAnvändare;
 
-        public LogIn(Database db)
+        public LogIn(LogicLayer logicLayer)
         {
             InitializeComponent();
-           this.database = db;
+            this.logicLayer = logicLayer;
         }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var användareLista = database.HämtaAnvändare();
+            var användareLista = logicLayer.HämtaAllaAnvändare();
+            var inloggadAnvändare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
 
-            var inloggadAnvändare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text); //  hämtar den inloggade användare för hyrningsprocess 
-
-            var systemAdminLista = database.InitieraSystemAdmin();
-          
+            var systemAdminLista = logicLayer.InitieraSystemAdmins();
 
             var Nyanvändare = användareLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
             var systemAdmin = systemAdminLista.FirstOrDefault(a => a.FullNamn == textNamn.Text && a.Lösenord == textLösenord.Text);
 
-
             if (Nyanvändare != null)
             {
-                new UthyrningForm(database, inloggadAnvändare).Show();
+                new UthyrningForm(logicLayer, inloggadAnvändare).Show();  // Skickar LogicLayer och inloggad användare
                 this.Hide();
-
             }
             else if (systemAdmin != null)
             {
-
-                new FordonHantering().Show();
+                new FordonHantering(logicLayer).Show();  // Skickar LogicLayer
                 this.Hide();
-                MessageBox.Show("1. Vid Uppdatering måste du fylla i alla fält och klicka på FordonID. " +
-                    "\n 2. För att ta bort måste du klicka på ForodonID och fylla i ForodonID fältet.");
+                MessageBox.Show("1. Vid Uppdatering måste du fylla i alla fält och klicka på FordonID." +
+                                "\n 2. För att ta bort måste du klicka på FordonID och fylla i FordonID-fältet.");
             }
             else
             {
-                MessageBox.Show("Din full namn eller lösenord är fel, försök igen");
+                MessageBox.Show("Ditt fulla namn eller lösenord är fel, försök igen");
                 textNamn.Clear();
                 textLösenord.Clear();
                 textNamn.Focus();
             }
-
-
         }
-        
+
+
+
         private void label2_Click(object sender, EventArgs e)
         {
-            new SkapaKonto(database).Show();
+            new SkapaKonto(logicLayer).Show();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -77,8 +73,11 @@ namespace TestLabb2
             }
             else
             {
-                textLösenord.PasswordChar = '*';            
+                textLösenord.PasswordChar = '*';
             }
         }
     }
+
+  
+    
 }

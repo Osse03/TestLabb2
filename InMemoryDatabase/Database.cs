@@ -129,7 +129,7 @@ namespace InMemoryDatabase
                        {
 
                            FordonID = 1,
-                          Typ ="El Scoter",
+                          Typ ="El Scooter",
                            BatteriNivå = 80,
                             Status = "Laddar"
 
@@ -138,7 +138,7 @@ namespace InMemoryDatabase
                       new Fordon
                       {
                          FordonID = 2,
-                         Typ ="El Scoter",
+                         Typ ="El Scooter",
                          BatteriNivå = 100,
                          Status = "Tillgänglig"
 
@@ -161,7 +161,7 @@ namespace InMemoryDatabase
                          new Fordon
                          {
                             FordonID = 1,
-                            Typ ="El Scoter",
+                            Typ ="El Scooter",
                             BatteriNivå = 80,
                             Status = "Laddar"
 
@@ -169,7 +169,7 @@ namespace InMemoryDatabase
                          new Fordon
                          {
                             FordonID = 2,
-                            Typ ="El Scoter",
+                            Typ ="El Scooter",
                             BatteriNivå = 0,
                             Status = "Underhåll"
 
@@ -177,7 +177,7 @@ namespace InMemoryDatabase
                           new Fordon
                          {
                             FordonID = 2,
-                            Typ ="El Scoter",
+                            Typ ="El Scooter",
                             BatteriNivå = 100,
                             Status = "Tillgänglig"
 
@@ -199,7 +199,7 @@ namespace InMemoryDatabase
                        new Fordon
                        {
                            FordonID = 1,
-                          Typ ="El Scoter",
+                          Typ ="El Scooter",
                            BatteriNivå = 80,
                             Status = "Tillgänglig"
 
@@ -228,7 +228,7 @@ namespace InMemoryDatabase
                          new Fordon
                          {
                             FordonID = 1,
-                            Typ ="El Scoter",
+                            Typ ="El Scooter",
                             BatteriNivå = 80,
                             Status = "Tillgänglig"
 
@@ -245,7 +245,7 @@ namespace InMemoryDatabase
                          new Fordon
                          {
                             FordonID = 3,
-                            Typ ="El Scoter",
+                            Typ ="El Scooter",
                             BatteriNivå = 80,
                             Status = "Laddar"
 

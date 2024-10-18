@@ -16,12 +16,13 @@ namespace TestLabb2
     public partial class FordonHantering : Form
     {
 
-        private Database database = new Database();
-        public FordonHantering()
+        private LogicLayer _logicLayer;
+
+        // Konstruktor som tar emot LogicLayer
+        public FordonHantering(LogicLayer logicLayer)
         {
             InitializeComponent();
-            listStationer.SelectedIndexChanged += new EventHandler(listStationer_SelectedIndexChanged);
-
+            _logicLayer = logicLayer;  // Tilldela den mottagna LogicLayer-instansen
         }
 
         private void LäggTillFordon_Load(object sender, EventArgs e)
@@ -36,7 +37,7 @@ namespace TestLabb2
             listFordon.Columns.Add("Status", 100);
 
             // Hämta stationerna från databasen
-            var stationer = database.HämtaStation();
+            var stationer = _logicLayer.HämtaStationer();
 
             // Rensa listan för att förhindra duplicering
             listStationer.Items.Clear();
@@ -61,7 +62,7 @@ namespace TestLabb2
 
                 // Hämta vald station
                 int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
-                var stationer = database.HämtaStation();
+                var stationer = _logicLayer.HämtaStationer();
                 var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
 
                 if (valdStation != null)
@@ -89,7 +90,7 @@ namespace TestLabb2
                 // Hämta den valda stationens ID
                 int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
 
-                var stationer = database.HämtaStation();
+                var stationer = _logicLayer.HämtaStationer();
 
                 // Hitta den valda stationen baserat på StationID
                 var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
@@ -128,7 +129,7 @@ namespace TestLabb2
                 int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
 
                 // Hämta stationerna från databasen
-                var stationer = database.HämtaStation();
+                var stationer = _logicLayer.HämtaStationer();
                 var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
 
                 if (valdStation != null)
@@ -168,7 +169,7 @@ namespace TestLabb2
             if (listStationer.SelectedItems.Count > 0)
             {
                 int selectedStationID = int.Parse(listStationer.SelectedItems[0].SubItems[0].Text);
-                var stationer = database.HämtaStation();
+                var stationer = _logicLayer.HämtaStationer();
                 var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
 
                 if (valdStation != null)
@@ -214,7 +215,7 @@ namespace TestLabb2
                 int selectedFordonID = int.Parse(listFordon.SelectedItems[0].SubItems[0].Text);
 
 
-                var stationer = database.HämtaStation();
+                var stationer = _logicLayer.HämtaStationer();
                 var valdStation = stationer.FirstOrDefault(station => station.StationID == selectedStationID);
 
                 if (valdStation != null)

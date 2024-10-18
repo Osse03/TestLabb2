@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Entiteter\Entiteter.csproj" />
-    <ProjectReference Include="..\InMemoryDatabase\InMemoryDatabase.csproj" />
+    <ProjectReference Include="..\InMemoryDatabase\Servicelager.csproj" />
   </ItemGroup>
 
 </Project>
